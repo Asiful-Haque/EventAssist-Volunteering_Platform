@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -26,7 +25,7 @@ const LoginPage = () => {
             email,
             password,
         };
-        try{
+        try {
             const res = await fetch("http://localhost:5000/api/users/login", {
                 method: "POST",
                 headers: {
@@ -34,17 +33,17 @@ const LoginPage = () => {
                 },
                 body: JSON.stringify(userData),
             });
-            const data = await res.json(); 
-            console.log("Token is ",data.token);
+            const data = await res.json();
+            console.log("Token is ", data.token);
 
             if (res.ok) {
                 alert("login successful!");
                 localStorage.setItem("token", data.token);
-                navigate("/"); 
+                navigate("/");
             } else {
                 alert(data.message || "login failed. Please try again.");
             }
-        }catch(error){
+        } catch (error) {
             console.error("Not fetched ", error);
         }
         navigate("/");

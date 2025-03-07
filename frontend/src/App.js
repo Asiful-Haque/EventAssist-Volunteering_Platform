@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import LoginPage from "./pages/login";
-import SignupPage from "./pages/signup";
-import Profile from "./pages/profile";
+import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import LoginPage from "./pages/user/login";
+import Profile from "./pages/user/profile";
+import SignupPage from "./pages/user/signup";
+import AddHistoryPage from "./pages/user/add_history";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/add_history" element={<AddHistoryPage />} />
             </Routes>
         </Router>
     );

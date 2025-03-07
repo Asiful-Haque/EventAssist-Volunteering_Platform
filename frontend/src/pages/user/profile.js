@@ -1,5 +1,6 @@
 import React from "react";
-import Header from "../components/Header";
+import { Navigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 const Profile = () => {
     return (
@@ -49,7 +50,7 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div className="w-full flex justify-end">
-                                <button className="bg-blue-600 text-white py-2 px-4 rounded-full font-semibold">
+                                <button className="bg-blue-600 text-white py-2 mr-40 px-4 rounded-full font-semibold">
                                     Edit Profile
                                 </button>
                             </div>
@@ -79,13 +80,13 @@ const Profile = () => {
                                         </div>
                                         <div className="flex justify-between">
                                             <label className="text-gray-700 font-semibold">
-                                                Phone
+                                                Age
                                             </label>
                                             <p className="text-blue-600">123 456 7890</p>
                                         </div>
                                         <div className="flex justify-between">
                                             <label className="text-gray-700 font-semibold">
-                                                Profession
+                                                Gender
                                             </label>
                                             <p className="text-blue-600">
                                                 Web Developer and Designer
@@ -97,45 +98,35 @@ const Profile = () => {
                                     <div className="space-y-4">
                                         <div className="flex justify-between">
                                             <label className="text-gray-700 font-semibold">
-                                                Experience
+                                                Skills
                                             </label>
                                             <p className="text-blue-600">Expert</p>
                                         </div>
                                         <div className="flex justify-between">
                                             <label className="text-gray-700 font-semibold">
-                                                Hourly Rate
+                                                Causes
                                             </label>
                                             <p className="text-blue-600">10$/hr</p>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <label className="text-gray-700 font-semibold">
-                                                Total Projects
-                                            </label>
-                                            <p className="text-blue-600">230</p>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <label className="text-gray-700 font-semibold">
-                                                English Level
-                                            </label>
-                                            <p className="text-blue-600">Expert</p>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <label className="text-gray-700 font-semibold">
-                                                Availability
-                                            </label>
-                                            <p className="text-blue-600">6 months</p>
-                                        </div>
-                                        <div>
-                                            <label className="text-gray-700 font-semibold">
-                                                Your Bio
-                                            </label>
-                                            <p className="text-gray-600">Your detail description</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    <div className="bg-[#828282] w-[90%] mx-auto mt-12 p-6 shadow-lg text-white rounded-lg">
+                        <div className="flex justify-between items-center">
+                            <h1 className="text-center text-4xl font-bold flex-1">
+                                Volunteering History
+                            </h1>
+                            <button
+                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                                onClick={() => Navigate("/add-history")}
+                            >
+                                Add History
+                            </button>
+                        </div>
+                        <p className="text-center text-lg mt-4">No Volunteering History</p>
+                    </div>
                 </div>
             </div>
         </>
