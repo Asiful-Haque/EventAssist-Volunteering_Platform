@@ -9,4 +9,7 @@ router.post("/register", UserController.registerUser);
 //login route
 router.post("/login", UserController.loginUser);
 
+//History adding
+router.post("/volunteering-history", UserController.addHistory);
+
 module.exports = router;

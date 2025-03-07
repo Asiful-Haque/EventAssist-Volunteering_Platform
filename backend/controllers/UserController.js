@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { findUserByEmail, createUser } = require("../models/UserModel");
+const { findUserByEmail, createUser, createVolHistory } = require("../models/UserModel");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const UserController = {};
@@ -54,12 +54,43 @@ UserController.loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-
+        console.log("user id for token is ",user.user_id);
         // Generate JWT token
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, { expiresIn: "1h" });
 
         res.json({ message: "Login successful", token });
+    } catch (error) {
+        console.error("Error logging in:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
+UserController.addHistory = async (req, res) => {
+    try {
+        const tokenFromLocalStorage = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
+        if (!tokenFromLocalStorage) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        //if found then checking for hte id's
+        const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
+        console.log("veiried token ",decoded);
+        const userId = parseInt(decoded.userId, 10);
+        console.log("use id is ",userId);
+        console.log("User ID type:", typeof userId);
+
+        const { event_name, total_hours } = req.body;
+        console.log("history is ", event_name, total_hours);
         
+        // console.log(email,password);
+        const history = await createVolHistory(userId, event_name, total_hours);
+        if (!history) {
+            return res.status(400).json({ message: "Not found" });
+        }
+        res.status(201).json({
+            message: "History added successfully",
+            user: { id: history.userId, eventName: history.eventName },
+        });
     } catch (error) {
         console.error("Error logging in:", error);
         res.status(500).json({ message: "Server error", error });
