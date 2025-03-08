@@ -66,7 +66,7 @@ export default function Signup() {
             skills,
             causes,
         };
-        console.log("user data is ", userData);
+        // console.log("user data is ", userData);
 
         try {
             const response = await fetch("http://localhost:5000/api/users/register", {
@@ -96,7 +96,7 @@ export default function Signup() {
         const selectedCause = e.target.textContent;
         setCauses((prevCauses) =>
             prevCauses.includes(selectedCause)
-                ? prevCauses.filter((cause) => cause !== selectedCause) // Removing if already selected
+                ? prevCauses.filter((cause) => cause !== selectedCause) 
                 : [...prevCauses, selectedCause]
         );
     };
@@ -104,48 +104,55 @@ export default function Signup() {
     return (
         <>
             <Header />
-            <div className="flex justify-center items-center h-screen bg-[#080710]">
+            <div
+                className="relative flex justify-center items-center h-screen bg-[#080710] bg-cover bg-center"
+                style={{ backgroundImage: "url('/volunteerCover1.jpg')" }}
+            >
+                <div className="absolute inset-0 bg-black bg-opacity-70"></div>
                 <div className="relative w-96 h-auto p-8 rounded-lg shadow-2xl backdrop-blur-md bg-white/10 border border-white/20">
-                    {/* Background Gradient Circles */}
+                    {/* Background Gradient Circles
                     <div className="absolute w-48 h-48 bg-gradient-to-r from-blue-700 to-blue-400 rounded-full -top-10 -left-10 opacity-10 z-0"></div>
-                    <div className="absolute w-48 h-48 bg-gradient-to-r from-red-500 to-orange-400 rounded-full -bottom-10 -right-10 opacity-10 z-0"></div>
+                    <div className="absolute w-48 h-48 bg-gradient-to-r from-red-500 to-orange-400 rounded-full -bottom-10 -right-10 opacity-10 z-0"></div> */}
 
-                    <h3 className="text-white text-2xl font-semibold text-center">Sign Up Here</h3>
+                    <h3 className="text-red-500 text-2xl font-semibold text-center">
+                        Sign Up Here
+                    </h3>
 
                     <form onSubmit={handleSubmit} className="mt-6">
-                        {/* Page 1: Basic Information */}
                         {page === 1 && (
                             <>
-                                <label className="text-white font-medium">Full Name</label>
+                                <label className="text-red-500 font-medium">Full Name</label>
                                 <input
                                     type="text"
                                     name="name"
                                     placeholder="Enter your name"
-                                    className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={fullName}
                                     onChange={handleNameChange}
                                 />
-                                <label className="text-white font-medium mt-4 block">Email</label>
+                                <label className="text-red-500 font-medium mt-4 block">Email</label>
                                 <input
                                     type="email"
                                     name="email"
                                     placeholder="Email"
-                                    className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={email}
                                     onChange={handleEmailChange}
                                 />
-                                <label className="text-white font-medium mt-4 block">Age</label>
+                                <label className="text-red-500 font-medium mt-4 block">Age</label>
                                 <input
                                     type="number"
                                     name="age"
                                     placeholder="Age"
-                                    className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={age}
                                     onChange={handleAgeChange}
                                 />
-                                <label className="text-white font-medium mt-4 block">Gender</label>
+                                <label className="text-red-500 font-medium mt-4 block">
+                                    Gender
+                                </label>
                                 <select
-                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500e"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={gender}
                                     onChange={handleGenderChange}
                                 >
@@ -158,7 +165,7 @@ export default function Signup() {
                                     <button
                                         type="button"
                                         onClick={goToNextPage}
-                                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 z-10"
+                                        className="px-4 py-2 bg-black text-red-500 rounded-md hover:bg-white hover:text-black z-10"
                                     >
                                         Next
                                     </button>
@@ -166,40 +173,41 @@ export default function Signup() {
                             </>
                         )}
 
-                        {/* Page 2: Password and Confirmation */}
                         {page === 2 && (
                             <>
-                                <label className="text-white font-medium">Password</label>
+                                <label className="text-red-500 font-medium">Password</label>
                                 <input
                                     type="password"
                                     name="password"
                                     placeholder="Password"
-                                    className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={password}
                                     onChange={handlePasswordChange}
                                 />
-                                <label className="text-white font-medium mt-4 block">
+                                <label className="text-red-500 font-medium mt-4 block">
                                     Confirm Password
                                 </label>
                                 <input
                                     type="password"
                                     name="confirmPassword"
                                     placeholder="Confirm Password"
-                                    className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={confirmPassword}
                                     onChange={handleConfirmPasswordChange}
                                 />
-                                <label className="text-white font-medium mt-4 block">Skills</label>
+                                <label className="text-red-500 font-medium mt-4 block">
+                                    Skills
+                                </label>
                                 <input
                                     type="text"
                                     name="skills"
                                     placeholder="Skills"
-                                    className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-black placeholder-black"
                                     value={skills}
                                     onChange={handleSkillChange}
                                 />
 
-                                <label className="text-white font-medium mt-4 block">
+                                <label className="text-red-500 font-medium mt-4 block">
                                     Causes You Support
                                 </label>
                                 <div className="flex gap-2 flex-wrap">
@@ -212,7 +220,7 @@ export default function Signup() {
                                         <button
                                             type="button"
                                             key={cause}
-                                            className={`px-3 py-1 rounded-md text-white border ${
+                                            className={`px-3 py-1 rounded-md text-black border ${
                                                 causes.includes(cause)
                                                     ? "bg-green-500"
                                                     : "bg-white/20"
@@ -226,7 +234,7 @@ export default function Signup() {
                                 <div className="flex justify-center mt-6">
                                     <button
                                         type="submit"
-                                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                                        className="px-4 py-2 bg-green-500 text-black rounded-md hover:bg-green-600"
                                     >
                                         Sign Up
                                     </button>
@@ -235,7 +243,6 @@ export default function Signup() {
                         )}
                     </form>
 
-                    {/* Link to Login page */}
                     <div className="mt-6 flex justify-center gap-4">
                         <p className="text-white z-10">
                             Already have an account?{" "}

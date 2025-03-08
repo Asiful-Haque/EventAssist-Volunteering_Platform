@@ -52,44 +52,45 @@ const LoginPage = () => {
     return (
         <>
             <Header />
-            <div className="flex justify-center items-center h-screen bg-[#080710]">
+            <div
+                className="relative flex justify-center items-center h-screen bg-[#080710] bg-cover bg-center"
+                style={{ backgroundImage: "url('/volunteerCover1.jpg')" }}
+            >
+                <div className="absolute inset-0 bg-black bg-opacity-70"></div>
                 <div className="relative w-96 h-[520px] p-8 rounded-lg shadow-2xl backdrop-blur-md bg-white/10 border border-white/20">
-                    <div className="absolute w-48 h-48 bg-gradient-to-r from-blue-700 to-blue-400 rounded-full -top-10 -left-10 opacity-10 z-0"></div>
-                    <div className="absolute w-48 h-48 bg-gradient-to-r from-red-500 to-orange-400 rounded-full -bottom-10 -right-10 opacity-10 z-0"></div>
-
-                    <h3 className="text-white text-2xl font-semibold text-center">Login Here</h3>
+                    <h3 className="text-red-500 text-2xl font-semibold text-center">Login Here</h3>
 
                     <form onSubmit={handleSubmit} className="mt-6">
-                        <label className="text-white font-medium">Email</label>
+                        <label className="text-red-500 font-medium">Email</label>
                         <input
                             type="email"
                             name="email"
                             placeholder="Email"
-                            className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500"
                             value={email}
                             onChange={handleEmailChange}
                         />
 
-                        <label className="text-white font-medium mt-4 block">Password</label>
+                        <label className="text-red-500 font-medium mt-4 block">Password</label>
                         <input
                             type="password"
                             name="password"
                             placeholder="Password"
-                            className="w-full mt-2 p-3 bg-white/20 text-white rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500"
                             value={password}
                             onChange={handlePasswordChange}
                         />
 
                         <button
                             type="submit"
-                            className="w-full mt-6 bg-white text-[#080710] p-3 text-lg font-semibold rounded-md hover:bg-gray-200 transition"
+                            className="w-full mt-6 bg-black text-white p-3 text-lg font-semibold rounded-md hover:bg-gray-200 transition"
                         >
                             Log In
                         </button>
                     </form>
 
                     <div className="flex justify-center gap-4 mt-6">
-                        <div className="w-32 bg-white/20 text-white text-center py-2 rounded-md cursor-pointer hover:bg-white/30 transition">
+                        <div className="w-32 bg-white/20 text-black text-center py-2 rounded-md cursor-pointer hover:bg-white/30 transition">
                             <i className="fab fa-google mr-2"></i>Google
                         </div>
                         <div className="w-32 bg-white/20 text-white text-center py-2 rounded-md cursor-pointer hover:bg-white/30 transition">
