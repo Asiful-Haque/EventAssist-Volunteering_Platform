@@ -27,4 +27,22 @@ async function createVolHistory(userId, eventName, totalHours) {
     return result.rows[0];
 }
 
-module.exports = { createUser, findUserByEmail, createVolHistory };
+const getVolHistoryByUserId = async (userId) => {
+    const result = await pool.query("SELECT * FROM volunteering_history WHERE user_id = $1", [
+        userId,
+    ]);
+    return result.rows; 
+};
+
+const findUserById = async (userId) => {
+    try {
+        const result = await pool.query("SELECT * FROM users WHERE user_id = $1", [userId]);
+        return result.rows[0]; 
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw new Error("Error fetching user data");
+    }
+};
+
+
+module.exports = { createUser, findUserByEmail, createVolHistory, getVolHistoryByUserId, findUserById };

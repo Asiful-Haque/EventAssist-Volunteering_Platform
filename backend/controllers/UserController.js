@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { findUserByEmail, createUser, createVolHistory } = require("../models/UserModel");
+const { findUserByEmail, createUser, createVolHistory, getVolHistoryByUserId, findUserById } = require("../models/UserModel");
 const JWT_SECRET = process.env.JWT_SECRET;
+
 
 const UserController = {};
 
@@ -96,5 +97,63 @@ UserController.addHistory = async (req, res) => {
         res.status(500).json({ message: "Server error", error });
     }
 };
+
+UserController.getHistory = async (req, res) => {
+    try {
+        const tokenFromLocalStorage = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
+        if (!tokenFromLocalStorage) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+        const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
+        console.log("Verified token:", decoded);
+        const userId = parseInt(decoded.userId, 10);
+
+        const history = await getVolHistoryByUserId(userId);
+
+        if (!history || history.length === 0) {
+            return res.status(404).json({ message: "No volunteering history found" });
+        }
+
+        res.status(200).json({ history });
+    } catch (error) {
+        console.error("Error fetching history:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
+
+ // Adjust based on your model
+
+
+UserController.getUserData = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
+        if (!token) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        console.log("Verified token:", decoded);
+
+        const userId = parseInt(decoded.userId, 10);
+
+        if (!userId) {
+            return res.status(400).json({ message: "Invalid token" });
+        }
+
+        const user = await findUserById(userId); 
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ user });
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
+
 
 module.exports = UserController;
