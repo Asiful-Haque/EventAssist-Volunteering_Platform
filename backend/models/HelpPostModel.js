@@ -15,7 +15,17 @@ async function getHelpPost(userId) {
     return result.rows;
 }
 
+async function createComment(req_id, user_id, comment) {
+    const result = await pool.query(
+        `insert into comments(req_id, user_id, comment)
+        values ($1, $2, $3) returning *`,
+        [req_id, user_id, comment]
+    );
+    return result.rows[0];
+}
+
 module.exports = {
     createHelpPost,
     getHelpPost,
+    createComment,
 };

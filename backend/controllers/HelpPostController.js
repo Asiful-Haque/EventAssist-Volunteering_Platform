@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { createHelpPost, getHelpPost } = require("../models/HelpPostModel");
+const { createHelpPost, getHelpPost, createComment  } = require("../models/HelpPostModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -53,5 +53,28 @@ HelpPostController.getPosts = async (req, res) => {
         res.status(500).json({ message: "Server error", error });
     }
 };
+
+HelpPostController.createCommentForPost = async (req, res) => {
+    try {
+        const tokenFromLocalStorage = req.headers.authorization?.split(" ")[1];
+        if (!tokenFromLocalStorage) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
+        const userId = parseInt(decoded.userId, 10);
+
+        const { post_id, comment } = req.body;
+
+        // console.log(email,password);
+        const post = await createComment(post_id, userId, comment);
+        res.status(201).json({
+            message: "Comment added successfully",
+        });
+    } catch (error) {
+        console.error("Error logging in:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+}
 
 module.exports = HelpPostController;

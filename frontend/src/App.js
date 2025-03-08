@@ -7,6 +7,7 @@ import AddHistoryPage from "./pages/user/add_history";
 import DashboardPage from "./pages/Dashboard/dashboard";
 import HelpPostPage from "./pages/Help_post/help_post";
 import AddPost from "./pages/Help_post/add_post";
+import HelpPostDetailsPage from "./pages/Help_post/help_post_details";
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/community_help_post" element={<HelpPostPage />} />
                 <Route path="/add_post" element={<AddPost />} />
+                <Route path="/help_post_details/:id" element={<HelpPostDetailsPage />} />
             </Routes>
         </Router>
     );
