@@ -19,7 +19,7 @@ const HelpPost = () => {
                 if (res.ok) {
                     const data = await res.json();
                     console.log("Fetched history data:", data);
-                    setPosts(data || []);//////////////////////
+                    setPosts(data.posts || []);//////////////////////
                 } else {
                     console.error("Failed to fetch history");
                 }
