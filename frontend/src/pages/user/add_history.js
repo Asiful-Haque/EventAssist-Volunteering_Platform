@@ -6,6 +6,7 @@ const AddHistoryPage = () => {
     const [eventName, setEventName] = useState("");
     const [contributedHours, setContributedHours] = useState("");
     const navigate = useNavigate();
+    
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -40,6 +41,7 @@ const AddHistoryPage = () => {
             console.error("Error adding history:", error);
         }
     };
+    
 
     return (
         <>
@@ -49,7 +51,7 @@ const AddHistoryPage = () => {
                     <h3 className="text-white text-2xl font-semibold text-center">
                         Add Volunteering History
                     </h3>
-
+                    
                     <form onSubmit={handleSubmit} className="mt-6">
                         <label className="text-white font-medium">Event Name</label>
                         <input
