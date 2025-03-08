@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { createHelpPost, getHelpPost, createComment  } = require("../models/HelpPostModel");
+const { createHelpPost, getHelpPost, createComment, getComments  } = require("../models/HelpPostModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -74,6 +74,17 @@ HelpPostController.createCommentForPost = async (req, res) => {
     } catch (error) {
         console.error("Error logging in:", error);
         res.status(500).json({ message: "Server error", error });
+    }
+}
+
+HelpPostController.getCommentsForPost = async (req, res) => {
+    try {
+        const { post_id } = req.params;
+        // console.log("psot id is ",post_id);
+        const comments = await getComments(post_id);
+        res.status(200).json({ comments });
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching comments" });
     }
 }
 

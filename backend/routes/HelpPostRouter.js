@@ -8,5 +8,6 @@ const router = express.Router();
 router.post("/create_post", HelpPostController.createPost);
 router.get("/getPosts", HelpPostController.getPosts);
 router.post("/submitComment", HelpPostController.createCommentForPost);
+router.get("/getComments/:post_id", HelpPostController.getCommentsForPost);
 
 module.exports = router;

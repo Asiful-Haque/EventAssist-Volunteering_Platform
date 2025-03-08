@@ -24,8 +24,20 @@ async function createComment(req_id, user_id, comment) {
     return result.rows[0];
 }
 
+async function getComments(post_id) {
+    const result = await pool.query(
+        `SELECT c.comment, u.full_name 
+         FROM comments c
+         JOIN users u ON c.user_id = u.user_id
+         WHERE c.req_id = $1;`,
+        [post_id]
+    );
+    return result.rows;
+}
+
 module.exports = {
     createHelpPost,
     getHelpPost,
     createComment,
+    getComments,
 };

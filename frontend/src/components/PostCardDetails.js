@@ -1,22 +1,43 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function PostCardDetails() {
     const location = useLocation();
     const { post_id, description } = location.state || {};
     const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        if (post_id) {
+            fetchComments();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [post_id]);
+
+    const fetchComments = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/helpPost/getComments/${post_id}`);
+            if (res.ok) {
+                const data = await res.json();
+                setComments(data.comments);
+            } else {
+                console.error("Failed to fetch comments.");
+            }
+        } catch (error) {
+            console.error("Error fetching comments:", error);
+        }
+    };
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
     };
+
     const handleCommentSubmit = async () => {
         if (!comment.trim()) {
             alert("Please enter a comment.");
             return;
         }
-        try{
-            console.log("Info is ",post_id,comment);
+        try {
             const res = await fetch("http://localhost:5000/api/helpPost/submitComment", {
                 method: "POST",
                 headers: {
@@ -28,18 +49,20 @@ export default function PostCardDetails() {
                     comment,
                 }),
             });
+
             if (res.ok) {
                 alert("Comment submitted successfully!");
-                setComment(""); 
+                setComment("");
+                fetchComments(); // Refresh comments after submitting
             } else {
                 const errorData = await res.json();
                 alert(`Error: ${errorData.message}`);
             }
-        }catch(error){
+        } catch (error) {
             console.error("Error submitting comment:", error);
             alert("An error occurred while submitting the comment.");
         }
-    }
+    };
 
     return (
         <div className="bg-white rounded-2xl shadow-lg p-5 w-[90%] mx-auto mt-5 transition-all duration-300 hover:shadow-2xl">
@@ -69,7 +92,7 @@ export default function PostCardDetails() {
                     ❤️ <span className="font-semibold">12</span>
                 </button>
                 <button className="flex items-center space-x-2 text-lg hover:text-blue-500 transition-all">
-                    💬 <span className="font-semibold">5</span>
+                    💬 <span className="font-semibold">{comments.length}</span>
                 </button>
             </div>
 
@@ -89,6 +112,34 @@ export default function PostCardDetails() {
                 >
                     Submit Comment
                 </button>
+            </div>
+
+            {/* Comments Section */}
+            <div className="mt-6">
+                <h3 className="text-lg font-semibold text-gray-900">Comments</h3>
+                {comments.length === 0 ? (
+                    <p className="text-gray-500 mt-2">No comments yet.</p>
+                ) : (
+                    <div className="space-y-4 mt-3">
+                        {comments.map((cmt) => (
+                            <div key={cmt._id} className="bg-gray-100 p-3 rounded-lg shadow-sm">
+                                <div className="flex items-center space-x-3">
+                                    <img
+                                        src="https://i.pravatar.cc/40"
+                                        alt="User Avatar"
+                                        className="w-10 h-10 rounded-full border"
+                                    />
+                                    <div>
+                                        <h4 className="text-sm font-semibold">
+                                            {cmt.full_name || "Anonymous"}
+                                        </h4>
+                                        <p className="text-gray-600 text-sm">{cmt.comment}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );
