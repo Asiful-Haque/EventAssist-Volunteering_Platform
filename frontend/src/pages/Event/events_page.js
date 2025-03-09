@@ -1,10 +1,37 @@
-// import { Link } from "react-router-dom";
-import EvenCard from "../../components/EventCard";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
+import EventCard from "../../components/EventCard";
 
 const EventPage = () => {
     const navigate = useNavigate();
+
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await fetch("http://localhost:5000/api/event/get_events", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    console.log("Fetched Event data:", data);
+                    setEvents(data.events || []); 
+                } else {
+                    console.error("Failed to fetch Events");
+                }
+            } catch (error) {
+                console.error("Error events history:", error);
+            }
+        };
+        fetchEvents();
+    }, []);
+
     return (
         <>
             <Header />
@@ -22,21 +49,15 @@ const EventPage = () => {
                         </button>
                     </div>
 
-                   
                     <div className="p-6 space-y-6">
                         <h2 className="text-center text-3xl font-bold text-black mb-4">
                             Recent Posts
                         </h2>
 
-                        
                         <div className="flex flex-wrap gap-4 justify-center">
-                            {/* {posts.map((post) => (
-                                <EvenCard post={post} />
-                            ))} */}
-                            <EvenCard />
-                            <EvenCard />
-                            <EvenCard />
-                            <EvenCard />
+                            {events.map((event) => (
+                                <EventCard event={event} />
+                            ))}
                         </div>
                     </div>
                 </div>

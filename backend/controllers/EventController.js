@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { createEventQuery } = require("../models/EventModel");
+const { createEventQuery, getEventQuery } = require("../models/EventModel");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -27,5 +27,18 @@ EventController.createEvent = async (req, res) => {
         res.status(500).json({ message: "Server error", error });
     }
 };
+
+EventController.getEvents = async (req,res) => {
+    try{
+        const events = await getEventQuery();
+        if (!events || events.length === 0) {
+            return res.status(404).json({ message: "No Event found" });
+        }
+        res.status(200).json({ events });
+    }catch(error){
+        console.error("Error logging in:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+}
 
 module.exports = EventController;

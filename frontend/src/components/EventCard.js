@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const EvenCard = () => {
+const EventCard = ({event}) => {
     const navigate = useNavigate();
 
     const onPostClick = () => {
         
     };
-
+    console.log(event);
     return (
         <div
             className="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl w-full sm:w-[45%] md:w-[30%] cursor-pointer bg-opacity-30"
@@ -20,28 +20,30 @@ const EvenCard = () => {
             />
 
             <div className="mb-3 mt-3">
-                <h3 className="text-xl font-semibold text-gray-900">Music Festival 2025</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                    Experience an amazing night with top artists from around the world.
-                </p>
+                <h3 className="text-xl font-semibold text-gray-900">{event.title}</h3>
+                <p className="text-sm text-gray-600 mt-1">{event.description}</p>
             </div>
 
             <div className="text-gray-700 text-sm space-y-2">
                 <div className="flex items-center">
                     <span className="font-semibold">📅 Date:</span>
-                    <span className="ml-2">March 15, 2025</span>
+                    <span className="ml-2">
+                        {new Date(event.event_date).toISOString().split("T")[0]}
+                    </span>
                 </div>
                 <div className="flex items-center">
                     <span className="font-semibold">⏰ Time:</span>
-                    <span className="ml-2">6:00 PM - 11:30 PM</span>
+                    <span className="ml-2">
+                        {event.start_time} - {event.end_time}
+                    </span>
                 </div>
                 <div className="flex items-center">
                     <span className="font-semibold">📍 Location:</span>
-                    <span className="ml-2">Central Park, New York</span>
+                    <span className="ml-2">{event.location}</span>
                 </div>
                 <div className="flex items-center">
                     <span className="font-semibold">🏷️ Category:</span>
-                    <span className="ml-2">Music & Entertainment</span>
+                    <span className="ml-2">{event.category}</span>
                 </div>
             </div>
 
@@ -60,4 +62,4 @@ const EvenCard = () => {
     );
 };
 
-export default EvenCard;
+export default EventCard;

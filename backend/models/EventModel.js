@@ -17,6 +17,14 @@ async function createEventQuery(
     return result.rows[0];
 }
 
+async function  getEventQuery() {
+    const result = await pool.query(
+        `select * from events`
+    );
+    return result.rows;
+}
+
 module.exports = {
     createEventQuery,
+    getEventQuery,
 };
