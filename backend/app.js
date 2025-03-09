@@ -5,6 +5,7 @@ const cors = require("cors");
 const userRouter = require("./routes/UserRouter");
 const dashboardRouter = require("./routes/DashboardRouter");
 const helpPostRouter = require("./routes/HelpPostRouter");
+const eventRouter = require("./routes/EventRouter");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json()); // Parse JSON request body
 app.use("/api/users", userRouter)
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api/helpPost", helpPostRouter);
+app.use("/api/event", eventRouter);
 
 app.get("/", (req, res) => {
     res.send("API is running...");
