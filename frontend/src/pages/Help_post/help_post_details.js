@@ -5,11 +5,8 @@ import PostCard from "../../components/PostCardDetails";
 const HelpPostDetailsPage = () => {
     return (
         <>
-            <Header />
-            <div>
-                <PostCard />
-                {/* <PostCard /> */}
-            </div>
+            {/* <Header /> */}
+            <PostCard />    
         </>
     );
 };

@@ -4,7 +4,8 @@ import HelpPost from "../../components/HelpPost";
 const HelpPostPage = () => {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
+            {/* 2 */}
             <div>
                 <HelpPost />
             </div>

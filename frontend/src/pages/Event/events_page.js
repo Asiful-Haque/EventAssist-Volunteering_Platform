@@ -67,7 +67,7 @@ const EventPage = () => {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div>
                 <div className="min-h-screen bg-gray-400">
                     <div className="sticky top-0 bg-black p-4 flex justify-between items-center z-10 shadow-lg">

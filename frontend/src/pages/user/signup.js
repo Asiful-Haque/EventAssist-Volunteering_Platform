@@ -102,7 +102,7 @@ export default function Signup() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div
                 className="relative flex justify-center items-center h-screen bg-[#080710] bg-cover bg-center"
                 style={{ backgroundImage: "url('/volunteerCover1.jpg')" }}

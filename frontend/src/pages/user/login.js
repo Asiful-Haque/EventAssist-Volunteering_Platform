@@ -5,19 +5,27 @@ import Header from "../../components/Header";
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
     const navigate = useNavigate();
 
-    // Handle email change
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
 
-    // Handle password change
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
 
-    // Handle form submission
+    const closeModal = () => {
+        setIsModalOpen(!isModalOpen);
+        navigate("/dashboard");
+    }
+    const closeModal2 = () => {
+        setIsModalOpen2(!isModalOpen2);
+        setEmail("");
+        setPassword("");
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("User Data:", { email, password });
@@ -37,21 +45,20 @@ const LoginPage = () => {
             console.log("Token is ", data.token);
 
             if (res.ok) {
-                alert("login successful!");
+                setIsModalOpen(true);
                 localStorage.setItem("token", data.token);
-                navigate("/");
             } else {
-                alert(data.message || "login failed. Please try again.");
+                setIsModalOpen2(true);
             }
         } catch (error) {
             console.error("Not fetched ", error);
         }
-        navigate("/");
+        // navigate("/");
     };
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div
                 className="relative flex justify-center items-center h-screen bg-[#080710] bg-cover bg-center"
                 style={{ backgroundImage: "url('/volunteerCover1.jpg')" }}
@@ -66,7 +73,7 @@ const LoginPage = () => {
                             type="email"
                             name="email"
                             placeholder="Email"
-                            className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500 placeholder-black"
                             value={email}
                             onChange={handleEmailChange}
                         />
@@ -76,14 +83,14 @@ const LoginPage = () => {
                             type="password"
                             name="password"
                             placeholder="Password"
-                            className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full mt-2 p-3 bg-white/20 text-black rounded-md outline-none focus:ring-2 focus:ring-blue-500 placeholder-black"
                             value={password}
                             onChange={handlePasswordChange}
                         />
 
                         <button
                             type="submit"
-                            className="w-full mt-6 bg-black text-white p-3 text-lg font-semibold rounded-md hover:bg-gray-200 transition"
+                            className="w-full mt-6 bg-black text-red-500 p-3 text-lg font-semibold rounded-md"
                         >
                             Log In
                         </button>
@@ -93,7 +100,7 @@ const LoginPage = () => {
                         <div className="w-32 bg-white/20 text-black text-center py-2 rounded-md cursor-pointer hover:bg-white/30 transition">
                             <i className="fab fa-google mr-2"></i>Google
                         </div>
-                        <div className="w-32 bg-white/20 text-white text-center py-2 rounded-md cursor-pointer hover:bg-white/30 transition">
+                        <div className="w-32 bg-white/20 text-black text-center py-2 rounded-md cursor-pointer hover:bg-white/30 transition">
                             <i className="fab fa-facebook mr-2"></i>Facebook
                         </div>
                     </div>
@@ -106,6 +113,42 @@ const LoginPage = () => {
                         </p>
                     </div>
                 </div>
+                {isModalOpen && (
+                    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+                        <div className="bg-black p-6 rounded-lg shadow-lg w-80">
+                            <h2 className="text-xl font-semibold text-green-500">
+                                Successfully Logged In !!
+                            </h2>
+
+                            <div className="mt-6 flex justify-end">
+                                <button
+                                    onClick={closeModal}
+                                    className="bg-green-500 text-white py-2 px-4 rounded-md"
+                                >
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {isModalOpen2 && (
+                    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+                        <div className="bg-black p-6 rounded-lg shadow-lg w-80">
+                            <h2 className="text-xl font-semibold text-red-500">
+                                Opps! Log In Failed!
+                            </h2>
+
+                            <div className="mt-6 flex justify-end">
+                                <button
+                                    onClick={closeModal2}
+                                    className="bg-red-500 text-white py-2 px-4 rounded-md"
+                                >
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );

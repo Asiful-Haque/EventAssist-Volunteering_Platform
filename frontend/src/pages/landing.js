@@ -11,7 +11,7 @@ const LandingPage = () => {
 
             <div className="absolute top-0 left-0 w-full bg-white bg-opacity-90 shadow-md z-10">
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center py-4">
-                    <h1 className="text-2xl font-bold text-gray-900">
+                    <h1 className="text-4xl font-bold text-gray-900">
                         Hands<span className="text-red-500">ON</span>
                     </h1>
                     <div className="hidden md:flex space-x-4">

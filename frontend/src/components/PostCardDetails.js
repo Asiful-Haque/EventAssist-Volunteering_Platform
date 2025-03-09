@@ -34,7 +34,6 @@ export default function PostCardDetails() {
 
     const handleCommentSubmit = async () => {
         if (!comment.trim()) {
-            alert("Please enter a comment.");
             return;
         }
         try {
@@ -51,7 +50,6 @@ export default function PostCardDetails() {
             });
 
             if (res.ok) {
-                alert("Comment submitted successfully!");
                 setComment("");
                 fetchComments(); // Refresh comments after submitting
             } else {
@@ -65,81 +63,91 @@ export default function PostCardDetails() {
     };
 
     return (
-        <div className="bg-white rounded-2xl shadow-lg p-5 w-[90%] mx-auto mt-5 transition-all duration-300 hover:shadow-2xl">
-            <div className="flex items-center space-x-3">
-                <img
-                    src="https://i.pravatar.cc/50"
-                    alt="User Avatar"
-                    className="w-12 h-12 rounded-full border-2 border-blue-500"
-                />
+        <div className="bg-black p-6">
+            <div className="bg-gray-500 bg-opacity-70 shadow-lg p-5 w-[90%] mx-auto transition-all duration-300 hover:shadow-2xl">
                 <div>
-                    <h3 className="font-semibold text-lg">John Doe</h3>
-                    <p className="text-sm text-gray-500">2 hours ago</p>
-                </div>
-            </div>
-
-            <div className="mt-4">
-                <p className="text-gray-800 text-lg leading-relaxed">{description}</p>
-                <img
-                    src={`https://picsum.photos/500/300?random=${Math.floor(Math.random() * 1000)}`}
-                    alt="Random Post"
-                    className="mt-3 w-full h-56 object-cover rounded-xl shadow-md"
-                />
-            </div>
-
-            <div className="flex justify-between items-center mt-4 text-gray-600">
-                <button className="flex items-center space-x-2 text-lg hover:text-red-500 transition-all">
-                    ❤️ <span className="font-semibold">12</span>
-                </button>
-                <button className="flex items-center space-x-2 text-lg hover:text-blue-500 transition-all">
-                    💬 <span className="font-semibold">{comments.length}</span>
-                </button>
-            </div>
-
-            <div className="mt-4">
-                <input
-                    type="text"
-                    value={comment}
-                    onChange={handleCommentChange}
-                    placeholder="Write a comment..."
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
-                <button
-                    type="button"
-                    onClick={handleCommentSubmit}
-                    className="mt-3 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-all"
-                >
-                    Submit Comment
-                </button>
-            </div>
-
-            {/* Comments Section */}
-            <div className="mt-6">
-                <h3 className="text-lg font-semibold text-gray-900">Comments</h3>
-                {comments.length === 0 ? (
-                    <p className="text-gray-500 mt-2">No comments yet.</p>
-                ) : (
-                    <div className="space-y-4 mt-3">
-                        {comments.map((cmt) => (
-                            <div key={cmt._id} className="bg-gray-100 p-3 rounded-lg shadow-sm">
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="https://i.pravatar.cc/40"
-                                        alt="User Avatar"
-                                        className="w-10 h-10 rounded-full border"
-                                    />
-                                    <div>
-                                        <h4 className="text-sm font-semibold">
-                                            {cmt.full_name || "Anonymous"}
-                                        </h4>
-                                        <p className="text-gray-600 text-sm">{cmt.comment}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="flex items-center space-x-3">
+                        <img
+                            src="https://i.pravatar.cc/50"
+                            alt="User Avatar"
+                            className="w-12 h-12 rounded-full border-2 border-blue-500"
+                        />
+                        <div>
+                            <h3 className="font-semibold text-lg">John Doe</h3>
+                            <p className="text-sm text-gray-500">2 hours ago</p>
+                        </div>
                     </div>
-                )}
+
+                    <div className="mt-4">
+                        <p className="text-gray-800 text-lg leading-relaxed">{description}</p>
+                        <img
+                            src={`https://picsum.photos/500/300?random=${Math.floor(
+                                Math.random() * 1000
+                            )}`}
+                            alt="Random Post"
+                            className="mt-3 w-full h-56 object-cover rounded-xl shadow-md"
+                        />
+                    </div>
+
+                    <div className="flex justify-between items-center mt-4 text-gray-600">
+                        <button className="flex items-center space-x-2 text-lg hover:text-red-500 transition-all">
+                            ❤️ <span className="font-semibold">12</span>
+                        </button>
+                        <button className="flex items-center space-x-2 text-lg hover:text-blue-500 transition-all">
+                            💬 <span className="font-semibold">{comments.length}</span>
+                        </button>
+                    </div>
+
+                    <div className="mt-4">
+                        <input
+                            type="text"
+                            value={comment}
+                            onChange={handleCommentChange}
+                            placeholder="Write a comment..."
+                            className="w-full p-3 bg-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+
+                        <button
+                            type="button"
+                            onClick={handleCommentSubmit}
+                            className="mt-3 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-all"
+                        >
+                            Submit Comment
+                        </button>
+                    </div>
+
+                    <div className="mt-6">
+                        <h3 className="text-lg font-semibold text-gray-900">Comments</h3>
+                        {comments.length === 0 ? (
+                            <p className="text-gray-500 mt-2">No comments yet.</p>
+                        ) : (
+                            <div className="space-y-4 mt-3">
+                                {comments.map((cmt) => (
+                                    <div
+                                        key={cmt._id}
+                                        className="bg-gray-100 p-3 rounded-lg shadow-sm"
+                                    >
+                                        <div className="flex items-center space-x-3">
+                                            <img
+                                                src="https://i.pravatar.cc/40"
+                                                alt="User Avatar"
+                                                className="w-10 h-10 rounded-full border"
+                                            />
+                                            <div>
+                                                <h4 className="text-sm font-semibold">
+                                                    {cmt.full_name || "Anonymous"}
+                                                </h4>
+                                                <p className="text-gray-600 text-sm">
+                                                    {cmt.comment}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );

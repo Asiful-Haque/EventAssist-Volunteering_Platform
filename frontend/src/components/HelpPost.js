@@ -43,11 +43,9 @@ const HelpPost = () => {
                 </button>
             </div>
 
-            {/* Content */}
             <div className="p-6 space-y-6">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Posts</h2>
 
-                {/* Demo Posts */}
                 <div className="space-y-4">
                     {posts.map((post) => (
                         <PostCard  post={post} />
