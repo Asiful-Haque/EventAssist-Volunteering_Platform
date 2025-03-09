@@ -7,6 +7,34 @@ const EventPage = () => {
     const navigate = useNavigate();
 
     const [events, setEvents] = useState([]);
+    const [categoryFilter, setCategoryFilter] = useState("");
+    const [locationFilter, setLocationFilter] = useState("");
+    const [availabilityFilter, setAvailabilityFilter] = useState("");
+    const [filteredEvents, setFilteredEvents ] = useState([]);
+
+    const handleCategoryChange = (e) => {
+        setCategoryFilter(e.target.value);
+    }
+    const handleLocationChange = (e) => {
+        setLocationFilter(e.target.value);
+    }
+    const handleAvailabilityChange = (e) => {
+        setAvailabilityFilter(e.target.value);
+    };
+    const makeFilter = () => {
+        const filtered = events.filter((event) => {
+            const matchesCategory = categoryFilter ? event.category === categoryFilter : true;
+            const matchesLocation = locationFilter ? event.location === locationFilter : true;
+            const matchesAvailability = availabilityFilter
+                ? event.availability === availabilityFilter
+                : true;
+
+            return matchesCategory && matchesLocation && matchesAvailability;
+        });
+
+        setFilteredEvents(filtered);
+    };
+
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -32,6 +60,11 @@ const EventPage = () => {
         fetchEvents();
     }, []);
 
+    useEffect(() => {
+        makeFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [categoryFilter, locationFilter, availabilityFilter, events]);
+
     return (
         <>
             <Header />
@@ -51,11 +84,48 @@ const EventPage = () => {
 
                     <div className="p-6 space-y-6">
                         <h2 className="text-center text-3xl font-bold text-black mb-4">
-                            Recent Posts
+                            Recent Events
                         </h2>
+                        <h2 className="text-center text-xl font-bold text-black mt-6">
+                            Filter Searches
+                        </h2>
+                        <div className="flex justify-center">
+                            <select
+                                value={categoryFilter}
+                                onChange={handleCategoryChange}
+                                className="px-4 py-2 bg-red-500 outline-none"
+                            >
+                                <option value="">Select Category</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Music">Music</option>
+                                <option value="Art">Art</option>
+                                <option value="Tech">Tech</option>
+                            </select>
+
+                            <select
+                                value={locationFilter}
+                                onChange={handleLocationChange}
+                                className="px-4 py-2  bg-red-500 outline-none"
+                            >
+                                <option value="">Select Location</option>
+                                <option value="New York">New York</option>
+                                <option value="Los Angeles">Los Angeles</option>
+                                <option value="Chicago">Chicago</option>
+                            </select>
+
+                            <select
+                                value={availabilityFilter}
+                                onChange={handleAvailabilityChange}
+                                className="px-4 py-2  bg-red-500 outline-none"
+                            >
+                                <option value="">Availability</option>
+                                <option value="Available">Available</option>
+                                <option value="Not Available">Not Available</option>
+                            </select>
+                        </div>
 
                         <div className="flex flex-wrap gap-4 justify-center">
-                            {events.map((event) => (
+                            {filteredEvents.map((event) => (
                                 <EventCard event={event} />
                             ))}
                         </div>
