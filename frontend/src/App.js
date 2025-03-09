@@ -10,6 +10,8 @@ import AddPost from "./pages/Help_post/add_post";
 import HelpPostDetailsPage from "./pages/Help_post/help_post_details";
 import LandingPage from "./pages/landing";
 import "./App.css";
+import EventPage from "./pages/Event/events_page";
+import AddEvent from "./pages/Event/add_event";
 
 function App() {
     return (
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/community_help_post" element={<HelpPostPage />} />
                 <Route path="/add_post" element={<AddPost />} />
                 <Route path="/help_post_details/:id" element={<HelpPostDetailsPage />} />
+                <Route path="/events" element={<EventPage />} />
+                <Route path="/add_event" element={<AddEvent />} />
             </Routes>
         </Router>
     );

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 export default function Signup() {
-    const [page, setPage] = useState(1); //by default first page
+    const [page, setPage] = useState(1); 
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -50,13 +50,12 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check if passwords match
+        
         if (!password || password !== confirmPassword) {
             alert("Passwords do not match.");
             return;
         }
 
-        // Prepare user data object
         const userData = {
             fullName,
             email,

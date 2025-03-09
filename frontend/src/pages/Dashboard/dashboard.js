@@ -7,13 +7,16 @@ import Header from "../../components/Header";const DashboardPage = () => {
         <>
             <Header />
             <div>
-                <h2>Hello from Dashboard</h2>   
+                <h2>Hello from Dashboard</h2>
                 <div>
                     <button>
                         <Link to="/community_help_post">Community Help post</Link>
                     </button>
                     <button>
                         <Link to="/signup">Signup</Link>
+                    </button>
+                    <button>
+                        <Link to="/events">Events</Link>
                     </button>
                 </div>
             </div>
