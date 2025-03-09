@@ -96,10 +96,10 @@ export default function AddPost() {
                                     onChange={handleUrgencyChange}
                                 >
                                     <option value="">Select Urgency</option>
-                                    <option value="urgent">Urgent</option>
-                                    <option value="low urgent">Low Urgent</option>
-                                    <option value="not necessary">Not Necessary</option>
-                                    <option value="necessary">Necessary</option>
+                                    <option value="Urgent">Urgent</option>
+                                    <option value="low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Not Necessary">Not Necessary</option>
                                 </select>
                             </div>
                             <div className="flex justify-end mt-6">
