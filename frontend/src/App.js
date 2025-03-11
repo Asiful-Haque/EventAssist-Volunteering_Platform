@@ -14,6 +14,9 @@ import EventPage from "./pages/Event/events_page";
 import AddEvent from "./pages/Event/add_event";
 import TeamsPage from "./pages/Team/teams_page";
 import TeamForm from "./pages/Team/create_team";
+import LeaderBoard from "./pages/Team/leader_board";
+
+
 
 
 function App() {
@@ -33,6 +36,7 @@ function App() {
                 <Route path="/add_event" element={<AddEvent />} />
                 <Route path="/teams" element={<TeamsPage />} />
                 <Route path="/add_teams" element={<TeamForm />} />
+                <Route path="/leaderboard" element={<LeaderBoard />} />
             </Routes>
         </Router>
     );

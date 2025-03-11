@@ -9,9 +9,10 @@ const TeamCard = ({ team }) => {
                 className="mt-3 w-full h-56 object-cover shadow-md"
             />
             <h3 className="text-lg font-semibold mt-3">{team.team_name}</h3>
+            <h3 className="text-lg font-semibold my-3">{team.team_type}</h3>
             <p className="text-gray-500 text-sm">{team.team_description}</p>
             <button className="px-4 py-2 mt-4 bg-black text-red-500 rounded-lg shadow-md hover:bg-white hover:text-black">
-                Form Team
+                Join Team
             </button>
         </div>
     );

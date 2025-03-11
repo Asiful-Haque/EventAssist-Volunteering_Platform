@@ -42,13 +42,23 @@ const TeamsPage = () => {
             </header>
 
             <div className="flex justify-center space-x-4 py-6">
-                <button className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black">
+                <button
+                    onClick={(e) => {
+                        navigate("/leaderboard");
+                    }}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black"
+                >
                     Leaderboard
                 </button>
                 <button className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black">
                     Invitations
                 </button>
-                <button onClick={(e) => {navigate('/add_teams')}} className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black">
+                <button
+                    onClick={(e) => {
+                        navigate("/add_teams");
+                    }}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black"
+                >
                     Form Team
                 </button>
                 <button className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black">
