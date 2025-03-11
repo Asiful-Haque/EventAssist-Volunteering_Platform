@@ -12,6 +12,9 @@ import LandingPage from "./pages/landing";
 import "./App.css";
 import EventPage from "./pages/Event/events_page";
 import AddEvent from "./pages/Event/add_event";
+import TeamsPage from "./pages/Team/teams_page";
+import TeamForm from "./pages/Team/create_team";
+
 
 function App() {
     return (
@@ -28,6 +31,8 @@ function App() {
                 <Route path="/help_post_details/:id" element={<HelpPostDetailsPage />} />
                 <Route path="/events" element={<EventPage />} />
                 <Route path="/add_event" element={<AddEvent />} />
+                <Route path="/teams" element={<TeamsPage />} />
+                <Route path="/add_teams" element={<TeamForm />} />
             </Routes>
         </Router>
     );
