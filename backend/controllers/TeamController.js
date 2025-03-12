@@ -1,5 +1,8 @@
-const { createTeamQuery } = require("../models/TeamModel");
+const { createTeamQuery, getTeamMembersQuery, getTeamEventsQuery } = require("../models/TeamModel");
 const { getTeamsQuery } = require("../models/TeamModel");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const TeamController = {};
 
@@ -37,5 +40,70 @@ TeamController.createTeam = async (req, res) => {
         res.status(500).json({ message: "Server error", error });
     }
 };
+
+// This will  get all members of each team
+TeamController.getTeamMembers = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        // console.log("Verified token:", decoded);
+
+        const userId = parseInt(decoded.userId, 10);
+
+        if (!userId) {
+            return res.status(400).json({ message: "Invalid token" });
+        }
+        const { team_id } = req.body; 
+
+        if (!team_id) {
+            return res.status(400).json({ message: "team_id is required" });
+        }
+        const members = await getTeamMembersQuery(team_id);
+        if (!members || members.length === 0) {
+            return res.status(404).json({ message: "No members found for this team" });
+        }
+        res.status(200).json({ members });
+    } catch (error) {
+        console.error("Error fetching team members:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
+// This will provide the events of each team
+TeamController.getTeamEvents = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        // console.log("Verified token:", decoded);
+
+        const userId = parseInt(decoded.userId, 10);
+
+        if (!userId) {
+            return res.status(400).json({ message: "Invalid token" });
+        }
+        const { team_id } = req.body;
+        console.log("team id is ",team_id);
+        if (!team_id) {
+            return res.status(400).json({ message: "team_id is required" });
+        }
+        const events = await getTeamEventsQuery(team_id);
+        if (!events || events.length === 0) {
+            return res.status(404).json({ message: "No events found for this team" });
+        }
+        res.status(200).json({ events });
+    } catch (error) {
+        console.error("Error fetching team events:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
 
 module.exports = TeamController;

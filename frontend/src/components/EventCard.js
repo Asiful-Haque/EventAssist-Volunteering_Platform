@@ -47,7 +47,9 @@ const EventCard = ({event}) => {
                 <div className="flex items-center">
                     <span className="font-semibold">📅 Date:</span>
                     <span className="ml-2">
-                        {new Date(event.event_date).toISOString().split("T")[0]}
+                        {event.event_date && !isNaN(new Date(event.event_date).getTime())
+                            ? new Date(event.event_date).toISOString().split("T")[0]
+                            : "No date available"}
                     </span>
                 </div>
                 <div className="flex items-center">

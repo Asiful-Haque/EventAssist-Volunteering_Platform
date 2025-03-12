@@ -110,7 +110,7 @@ UserController.getHistory = async (req, res) => {
             return res.status(401).json({ message: "No token provided" });
         }
         const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
-        console.log("Verified token:", decoded);
+        // console.log("Verified token:", decoded);
         const userId = parseInt(decoded.userId, 10);
 
         const history = await getVolHistoryByUserId(userId);
@@ -134,7 +134,7 @@ UserController.editUserProfile = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log("Verified token:", decoded);
+        // console.log("Verified token:", decoded);
 
         const userId = parseInt(decoded.userId, 10);
 
@@ -177,7 +177,7 @@ UserController.getUserData = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log("Verified token:", decoded);
+        // console.log("Verified token:", decoded);
 
         const userId = parseInt(decoded.userId, 10);
 

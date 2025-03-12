@@ -1,6 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const TeamCard = ({ team }) => {
+    const navigate = useNavigate();
+
+    const handleJoinTeam = () => {
+        if (team.team_type === "Public") {
+            navigate("/team_dashboard", { state: { team_id: team.team_id } });
+        } else {
+            alert("This is a private team!");
+        }
+    };
+
     return (
         <div className="bg-white p-5  shadow-lg hover:shadow-2xl cursor-pointer text-center bg-opacity-30 w-[100%]">
             <img
@@ -11,7 +22,10 @@ const TeamCard = ({ team }) => {
             <h3 className="text-lg font-semibold mt-3">{team.team_name}</h3>
             <h3 className="text-lg font-semibold my-3">{team.team_type}</h3>
             <p className="text-gray-500 text-sm">{team.team_description}</p>
-            <button className="px-4 py-2 mt-4 bg-black text-red-500 rounded-lg shadow-md hover:bg-white hover:text-black">
+            <button
+                className="px-4 py-2 mt-4 bg-black text-red-500 rounded-lg shadow-md hover:bg-white hover:text-black"
+                onClick={handleJoinTeam}
+            >
                 Join Team
             </button>
         </div>

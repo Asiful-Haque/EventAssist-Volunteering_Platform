@@ -14,10 +14,34 @@ async function createTeamQuery(teamType, teamName, teamDescription) {
     return result.rows[0];
 }
 
+//from database its fetching members of teams with junction table
+async function getTeamMembersQuery(teamId) {
+    const result = await pool.query(
+        `SELECT users.user_id, users.full_name 
+         FROM participation 
+         JOIN users ON participation.user_id = users.user_id 
+         WHERE participation.team_id = $1`,
+        [teamId]
+    );
+    return result.rows;
+}
 
+// it fetches all events organized by a team
+async function getTeamEventsQuery(teamId) {
+    const result = await pool.query(
+        `SELECT events.*
+         FROM team_events 
+         JOIN events ON team_events.event_id = events.event_id 
+         WHERE team_events.team_id = $1`,
+        [teamId]
+    );
+    return result.rows;
+}
 
 
 module.exports = {
     getTeamsQuery,
     createTeamQuery,
+    getTeamMembersQuery,
+    getTeamEventsQuery,
 };
