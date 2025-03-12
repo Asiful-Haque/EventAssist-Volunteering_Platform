@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
 
     return (
         <div
-            className="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl cursor-pointer transition transform hover:scale-105"
+            className="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl cursor-pointer transition transform hover:scale-105 bg-opacity-30"
             onClick={onPostClick}
         >
             <div className="flex items-center mb-3">

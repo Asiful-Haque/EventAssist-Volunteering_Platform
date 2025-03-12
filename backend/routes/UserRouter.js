@@ -16,4 +16,6 @@ router.post("/volunteering-history", UserController.addHistory);
 router.get("/volunteering-history", UserController.getHistory);
 router.get("/profile", UserController.getUserData);
 
+router.put("/edit_profile", UserController.editUserProfile);
+
 module.exports = router;

@@ -1,12 +1,18 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { findUserByEmail, createUser, createVolHistory, getVolHistoryByUserId, findUserById } = require("../models/UserModel");
+const {
+    findUserByEmail,
+    createUser,
+    createVolHistory,
+    getVolHistoryByUserId,
+    findUserById,
+    updateUserQuery,
+} = require("../models/UserModel");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const UserController = {};
 
-// Register a new user
 UserController.registerUser = async (req, res) => {
     try {
         const { fullName, email, password, age, gender, skills, causes } = req.body;
@@ -41,7 +47,7 @@ UserController.registerUser = async (req, res) => {
     }
 };
 
-// Login user
+
 UserController.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -56,7 +62,6 @@ UserController.loginUser = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
         console.log("user id for token is ",user.user_id);
-        // Generate JWT token
         const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, { expiresIn: "1h" });
 
         res.json({ message: "Login successful", token });
@@ -121,13 +126,52 @@ UserController.getHistory = async (req, res) => {
     }
 };
 
+UserController.editUserProfile = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) {
+            return res.status(401).json({ message: "No token provided" });
+        }
 
- // Adjust based on your model
+        const decoded = jwt.verify(token, JWT_SECRET);
+        console.log("Verified token:", decoded);
+
+        const userId = parseInt(decoded.userId, 10);
+
+        if (!userId) {
+            return res.status(400).json({ message: "Invalid token" });
+        }
+
+        const { fullName, email, age, gender, skills, causes } = req.body;
+
+        const existingUser = await findUserByEmail(email);
+        if (!existingUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const updatedUser = await updateUserQuery(
+            fullName,
+            email,
+            age,
+            gender,
+            skills,
+            causes,
+            userId
+        );
+
+
+        res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        res.status(500).json({ message: "Server error", error });
+    }
+};
+
 
 
 UserController.getUserData = async (req, res) => {
     try {
-        const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
+        const token = req.headers.authorization?.split(" ")[1]; 
         if (!token) {
             return res.status(401).json({ message: "No token provided" });
         }

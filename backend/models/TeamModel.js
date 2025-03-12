@@ -15,6 +15,8 @@ async function createTeamQuery(teamType, teamName, teamDescription) {
 }
 
 
+
+
 module.exports = {
     getTeamsQuery,
     createTeamQuery,

@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../components/Header";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -57,9 +57,8 @@ const Profile = () => {
 
     return (
         <>
-            <Header />
-            <div className="p-4 bg-[#080710] min-h-screen">
-                <div className="bg-white rounded-lg p-6 shadow-lg  w-[90%] mx-auto">
+            <div className="p-4 bg-gray-400 min-h-screen">
+                <div className="bg-gray-200 rounded-lg p-6 shadow-lg  w-[90%] mx-auto">
                     <form>
                         <div className="flex flex-wrap">
                             <div className="w-full md:w-1/4 text-center">
@@ -69,7 +68,7 @@ const Profile = () => {
                                     className="w-3/4 h-auto rounded-full mx-auto"
                                 />
                                 <label className="block mt-4">
-                                    <span className="inline-block px-4 py-2 bg-gray-800 text-white rounded cursor-pointer">
+                                    <span className="inline-block px-4 py-2 bg-red-500 text-white rounded cursor-pointer">
                                         Change Photo
                                     </span>
                                     <input type="file" className="hidden" />
@@ -84,6 +83,14 @@ const Profile = () => {
                                     {userData ? userData.user.email : ""}
                                 </h6>
                             </div>
+                            <Link
+                                to="/edit_userProfile"
+                                state={{ userData: userData?.user }} 
+                            >
+                                <button className="bg-red-500 mt-20 h-10 text-white px-4 py-2 rounded-lg">
+                                    Edit Profile
+                                </button>
+                            </Link>
                         </div>
 
                         <div className="flex flex-wrap mt-8">
@@ -146,7 +153,7 @@ const Profile = () => {
                     <div className="bg-[#828282] w-[90%] mx-auto mt-12 p-6 shadow-lg text-white rounded-lg">
                         <div className="flex justify-between items-center">
                             <button
-                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                                className="bg-red-500 text-white px-4 py-2 rounded-lg"
                                 onClick={() => navigate("/add_history")}
                             >
                                 Add History

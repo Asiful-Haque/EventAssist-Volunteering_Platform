@@ -31,13 +31,12 @@ const HelpPost = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            
-            <div className="sticky top-0 bg-gradient-to-r from-purple-500 to-blue-500 p-4 flex justify-between items-center z-10 shadow-lg">
-                <h1 className="text-2xl font-semibold text-white">Contribute to the Community</h1>
+        <div className="min-h-screen bg-gray-400">
+            <div className="sticky top-0 bg-black p-4 flex justify-between items-center z-10 shadow-lg">
+                <h1 className="text-2xl font-semibold text-red-500">Contribute to the Community</h1>
                 <button
                     onClick={() => navigate("/add_post")}
-                    className="bg-white text-black py-2 px-4 rounded-full font-semibold hover:bg-yellow-400 transition duration-300"
+                    className="bg-red-500 text-white py-2 px-4 rounded-full font-semibold hover:bg-white hover:text-black transition duration-300"
                 >
                     Add Request
                 </button>
@@ -48,7 +47,7 @@ const HelpPost = () => {
 
                 <div className="space-y-4">
                     {posts.map((post) => (
-                        <PostCard  post={post} />
+                        <PostCard post={post} />
                     ))}
                 </div>
             </div>

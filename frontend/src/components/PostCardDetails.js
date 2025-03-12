@@ -63,8 +63,11 @@ export default function PostCardDetails() {
     };
 
     return (
-        <div className="bg-black p-6">
-            <div className="bg-gray-500 bg-opacity-70 shadow-lg p-5 w-[90%] mx-auto transition-all duration-300 hover:shadow-2xl">
+        <div className="bg-gray-400 p-6">
+            <div
+                className="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl w-[90%] m-auto 
+                cursor-pointer bg-opacity-30"
+            >
                 <div>
                     <div className="flex items-center space-x-3">
                         <img
@@ -104,7 +107,7 @@ export default function PostCardDetails() {
                             value={comment}
                             onChange={handleCommentChange}
                             placeholder="Write a comment..."
-                            className="w-full p-3 bg-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-3 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
 
                         <button
@@ -125,7 +128,7 @@ export default function PostCardDetails() {
                                 {comments.map((cmt) => (
                                     <div
                                         key={cmt._id}
-                                        className="bg-gray-100 p-3 rounded-lg shadow-sm"
+                                        className="bg-blue-100 p-3 rounded-lg shadow-sm"
                                     >
                                         <div className="flex items-center space-x-3">
                                             <img
