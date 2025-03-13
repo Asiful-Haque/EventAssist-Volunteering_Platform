@@ -7,6 +7,8 @@ const Profile = () => {
     const [historyData, setHistoryData] = useState([]);
     const [eventData, setEventData] = useState([]);
     const [userData, setUserData] = useState(null);
+    const [totalPoints, setTotalPoints] = useState(0);
+    const [totalhours, setTotalHours] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,8 +24,8 @@ const Profile = () => {
                 if (res.ok) {
                     const data = await res.json();
                     console.log("Fetched history data:", data);
-                    setHistoryData(data.history?.volunteeringHistory || []); 
-                    setEventData(data.history?.eventDetails || []);    
+                    setHistoryData(data.history?.volunteeringHistory || []);
+                    setEventData(data.history?.eventDetails || []);
                 } else {
                     console.error("Failed to fetch history");
                 }
@@ -57,16 +59,48 @@ const Profile = () => {
         fetchUserData();
     }, []);
 
-    let totalHistoryHours = 0;
-    for (let i = 0; i < historyData.length; i++) {
-        totalHistoryHours += historyData[i].total_hours;
-    }
+    useEffect(() => {
+        let totalHistoryHours = historyData.reduce((acc, item) => acc + item.total_hours, 0);
+        let totalEventHours = eventData.reduce((acc, item) => acc + item.total_hours_rounded, 0);
 
-    let totalEventHours = 0;
-    for (let i = 0; i < eventData.length; i++) {
-        totalEventHours += eventData[i].total_hours_rounded;
-    }
-    let totalhours = totalEventHours + totalHistoryHours;
+        const totalhours = totalEventHours + totalHistoryHours;
+        setTotalHours(totalhours);
+
+        const points = totalhours * 5;
+        setTotalPoints(points);
+
+        const updateUserPoints = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    console.error("No token found");
+                    return;
+                }
+
+                const res = await fetch("http://localhost:5000/api/users/update_points", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ totalPoints: points }),
+                });
+
+                if (res.ok) {
+                    console.log("User points updated successfully");
+                } else {
+                    const errorData = await res.json();
+                    console.error("Failed to update user points", errorData);
+                }
+            } catch (error) {
+                console.error("Error updating user points:", error);
+            }
+        };
+
+        if (totalhours > 0) {
+            updateUserPoints();
+        }
+    }, [historyData, eventData]); 
 
     return (
         <>
@@ -169,7 +203,7 @@ const Profile = () => {
                                 Add History
                             </button>
                             <h1>Logged Hours: {totalhours}</h1>
-                            <h1>Total points: {totalhours * 5}</h1>
+                            <h1>Total points: {totalPoints}</h1>
                         </div>
 
                         {historyData.length === 0 && eventData.length === 0 && (

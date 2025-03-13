@@ -11,6 +11,18 @@ async function createUser(fullName, email, hashedPassword, age, gender, skills, 
     return result.rows[0];
 }
 
+async function userPoints(userId, points) {
+    const result = await pool.query(
+        `UPDATE users 
+     SET points = $1 
+     WHERE user_id = $2 
+     RETURNING user_id, points`,
+        [points, userId] 
+    );
+    return result.rows[0]; 
+}
+
+
 // Find a user by email
 async function findUserByEmail(email) {
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
@@ -86,31 +98,6 @@ const getUserEvents = async (userId) => {
         console.error("Error fetching user:", error);
         throw new Error("Error fetching user data");
     }
-    const query = `
-        select 
-            events.event_id,
-            events.title,
-            events.description,
-            events.category,
-            events.location,
-            events.event_date,
-            events.start_time,
-            events.end_time
-        from 
-            events
-        join 
-            user_events ON events.event_id = user_events.event_id
-        where 
-            user_events.user_id = $1;
-    `;
-
-    try {
-        const result = await pool.query(query, [userId]);
-        return result.rows; 
-    } catch (error) {
-        console.error("Error fetching user events:", error);
-        throw error;
-    }
 };
 
 
@@ -121,4 +108,6 @@ module.exports = {
     getVolHistoryByUserId,
     findUserById,
     updateUserQuery,
+    getUserEvents,
+    userPoints,
 };
