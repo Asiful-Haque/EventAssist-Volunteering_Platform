@@ -115,6 +115,7 @@ Install my-project with npm 🚀
   POST /api/teams/add_teams - Create a new team 
   POST /api/teams/see_members - Fetch all members of a team 
   POST /api/teams/see_events - Fetch all events organized by a team   
+  GET /api/teams/see_private_teams - Fetch all private groups of each user
 ```
 
 
