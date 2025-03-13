@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const [historyData, setHistoryData] = useState([]);
+    const [eventData, setEventData] = useState([]);
     const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
 
@@ -21,7 +22,8 @@ const Profile = () => {
                 if (res.ok) {
                     const data = await res.json();
                     console.log("Fetched history data:", data);
-                    setHistoryData(data.history || []);
+                    setHistoryData(data.history?.volunteeringHistory || []); 
+                    setEventData(data.history?.eventDetails || []);    
                 } else {
                     console.error("Failed to fetch history");
                 }
@@ -55,6 +57,17 @@ const Profile = () => {
         fetchUserData();
     }, []);
 
+    let totalHistoryHours = 0;
+    for (let i = 0; i < historyData.length; i++) {
+        totalHistoryHours += historyData[i].total_hours;
+    }
+
+    let totalEventHours = 0;
+    for (let i = 0; i < eventData.length; i++) {
+        totalEventHours += eventData[i].total_hours_rounded;
+    }
+    let totalhours = totalEventHours + totalHistoryHours;
+
     return (
         <>
             <div className="p-4 bg-gray-400 min-h-screen">
@@ -83,10 +96,7 @@ const Profile = () => {
                                     {userData ? userData.user.email : ""}
                                 </h6>
                             </div>
-                            <Link
-                                to="/edit_userProfile"
-                                state={{ userData: userData?.user }} 
-                            >
+                            <Link to="/edit_userProfile" state={{ userData: userData?.user }}>
                                 <button className="bg-red-500 mt-20 h-10 text-white px-4 py-2 rounded-lg">
                                     Edit Profile
                                 </button>
@@ -158,15 +168,17 @@ const Profile = () => {
                             >
                                 Add History
                             </button>
+                            <h1>Logged Hours: {totalhours}</h1>
+                            <h1>Total points: {totalhours * 5}</h1>
                         </div>
 
-                        {historyData.length === 0 && (
+                        {historyData.length === 0 && eventData.length === 0 && (
                             <h2 className="text-white text-2xl font-semibold text-center">
                                 No Volunteering History
                             </h2>
                         )}
-                        {/* Display fetched history data */}
-                        {historyData.length > 0 && (
+
+                        {historyData.length > 0 || eventData.length > 0 ? (
                             <div className="text-white text-sm mt-4 p-3 bg-gray-700/50 rounded-md">
                                 <h4 className="text-lg font-semibold">
                                     Your Volunteering History:
@@ -177,8 +189,17 @@ const Profile = () => {
                                             {item.event_name} - {item.total_hours} hours
                                         </li>
                                     ))}
+                                    {eventData.map((event, index) => (
+                                        <li key={index} className="mt-1">
+                                            {event.event_name} - {event.total_hours_rounded} hours
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
+                        ) : (
+                            <h2 className="text-white text-2xl font-semibold text-center">
+                                No Volunteering History
+                            </h2>
                         )}
                     </div>
                 </div>

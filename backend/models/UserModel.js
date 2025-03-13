@@ -40,12 +40,30 @@ async function updateUserQuery(fullName, email, age, gender, skills, causes, use
 }
 
 
+// const getVolHistoryByUserId = async (userId) => {
+//     const result = await pool.query("SELECT * FROM volunteering_history WHERE user_id = $1", [
+//         userId,
+//     ]);
+//     return result.rows; 
+// };
 const getVolHistoryByUserId = async (userId) => {
-    const result = await pool.query("SELECT * FROM volunteering_history WHERE user_id = $1", [
+    const volHistoryQuery = pool.query("SELECT * FROM volunteering_history WHERE user_id = $1", [
         userId,
     ]);
-    return result.rows; 
+
+    const eventsQuery = pool.query(
+        "select e.title AS event_name, e.total_hours_rounded  FROM volunteering v JOIN events e ON v.event_id = e.event_id WHERE v.user_id = $1",
+        [userId]
+    );
+
+    const [volHistory, events] = await Promise.all([volHistoryQuery, eventsQuery]);
+
+    return {
+        volunteeringHistory: volHistory.rows,
+        eventDetails: events.rows,
+    };
 };
+
 
 const findUserById = async (userId) => {
     try {
@@ -54,6 +72,44 @@ const findUserById = async (userId) => {
     } catch (error) {
         console.error("Error fetching user:", error);
         throw new Error("Error fetching user data");
+    }
+};
+
+const getUserEvents = async (userId) => {
+    try {
+        const result = await pool.query(
+            "select events.event_id, events.description, events.category, events.location, events.event_date, events.start_time,events.end_time from events join volunteering",
+            [userId]
+        );
+        return result.rows[0];
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw new Error("Error fetching user data");
+    }
+    const query = `
+        select 
+            events.event_id,
+            events.title,
+            events.description,
+            events.category,
+            events.location,
+            events.event_date,
+            events.start_time,
+            events.end_time
+        from 
+            events
+        join 
+            user_events ON events.event_id = user_events.event_id
+        where 
+            user_events.user_id = $1;
+    `;
+
+    try {
+        const result = await pool.query(query, [userId]);
+        return result.rows; 
+    } catch (error) {
+        console.error("Error fetching user events:", error);
+        throw error;
     }
 };
 
