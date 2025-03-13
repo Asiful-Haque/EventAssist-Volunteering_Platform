@@ -38,10 +38,21 @@ async function getTeamEventsQuery(teamId) {
     return result.rows;
 }
 
+async function getUserPrivateTeamsQuery(userId) {
+    const result = await pool.query(
+        `select teams.team_id, teams.team_name, teams.team_description, teams.team_type 
+         from participation 
+         join teams on participation.team_id = teams.team_id 
+         where participation.user_id = $1 and teams.team_type = 'Private'`,
+        [userId]
+    );
+    return result.rows;
+}
 
 module.exports = {
     getTeamsQuery,
     createTeamQuery,
     getTeamMembersQuery,
     getTeamEventsQuery,
+    getUserPrivateTeamsQuery,
 };
