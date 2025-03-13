@@ -61,7 +61,12 @@ const TeamsPage = () => {
                 >
                     Form Team
                 </button>
-                <button className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black">
+                <button
+                    onClick={(e) => {
+                        navigate("/team_private");
+                    }}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-white hover:text-black"
+                >
                     Private Teams
                 </button>
             </div>

@@ -17,6 +17,7 @@ import TeamForm from "./pages/Team/create_team";
 import LeaderBoard from "./pages/Team/leader_board";
 import EditProfile from "./pages/user/edit_profile";
 import TeamDashboard from "./pages/Team/team_dashboard";
+import PrivateTeams from "./pages/Team/team_private_user";
 
 
 
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/leaderboard" element={<LeaderBoard />} />
                 <Route path="/edit_userProfile" element={<EditProfile />} />
                 <Route path="/team_dashboard" element={<TeamDashboard />} />
+                <Route path="/team_private" element={<PrivateTeams />} />
             </Routes>
         </Router>
     );
