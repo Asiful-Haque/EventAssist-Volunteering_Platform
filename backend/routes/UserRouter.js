@@ -18,6 +18,7 @@ router.get("/profile", UserController.getUserData);
 
 router.put("/edit_profile", UserController.editUserProfile);
 router.put("/update_points", UserController.UpdateUserPoint);
+router.get("/sorted_by_points", UserController.getUsersSortedByPoints);
                                                        
 
 module.exports = router;

@@ -8,6 +8,7 @@ const {
     findUserById,
     updateUserQuery,
     userPoints,
+    getUsersByPoints,
 } = require("../models/UserModel");
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -227,6 +228,30 @@ UserController.UpdateUserPoint = async (req, res) => {
     } catch (error) {
         console.error("Error fetching user data:", error);
         res.status(500).json({ message: "Server error", error });
+    }
+};
+
+UserController.getUsersSortedByPoints = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) {
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        console.log("Verified token:", decoded);
+        const userId = decoded.userId; 
+        if (!userId) {
+            return res.status(400).json({ message: "Invalid token" });
+        }
+        const users = await getUsersByPoints(userId);
+        if (!users || users.length === 0) {
+            return res.status(404).json({ message: "No users found" });
+        }
+        return res.status(200).json({ users }); 
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        return res.status(500).json({ message: "Server error", error: error.message });
     }
 };
 

@@ -105,29 +105,42 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
+                <div
+                    onClick={() => {
+                        navigate("/leaderboard_user");
+                    }}
+                    className="backdrop-blur-md bg-white/10 py-14 rounded-2xl shadow-xl hover:shadow-2xl cursor-pointer transition transform hover:scale-110 w-[250px]"
+                >
+                    <div className="flex items-center mb-4">
+                        <div className="mx-auto flex flex-col items-center">
+                            <i className="fas fa-rocket text-4xl text-red-500 mb-2"></i>
+                            <h3 className="text-xl font-bold text-gray-900">Leaderboard</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="absolute flex-center bottom-0 w-[90%] bg-red-500 shadow-lg rounded-t-3xl py-12">
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div>
                         <h3 className="text-4xl font-bold text-black">70+</h3>
-                        <p className="text-black font-semibold">Coded Elements</p>
+                        <p className="text-black font-semibold">Countries</p>
                         <p className="text-black">
-                            From buttons to inputs, navbars, alerts, or cards, you are covered.
+                            More than 70 countries are connected with this platform.
                         </p>
                     </div>
                     <div>
-                        <h3 className="text-4xl font-bold text-black">15+</h3>
-                        <p className="text-black font-semibold">Design Blocks</p>
+                        <h3 className="text-4xl font-bold text-black">15000+</h3>
+                        <p className="text-black font-semibold">Active Volunteers</p>
                         <p className="text-black">
-                            Mix the sections, change the colors and unleash creativity.
+                            Active 15k volunteers across the world are contributing.
                         </p>
                     </div>
                     <div>
-                        <h3 className="text-4xl font-bold text-black">4</h3>
-                        <p className="text-black font-semibold">Pages</p>
+                        <h3 className="text-4xl font-bold text-black">6000+</h3>
+                        <p className="text-black font-semibold">Events</p>
                         <p className="text-black">
-                            Save 3-4 weeks of work with our pre-made pages.
+                            Events are successfully done by the active volunteers.
                         </p>
                     </div>
                 </div>

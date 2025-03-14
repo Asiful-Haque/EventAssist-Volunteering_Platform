@@ -18,6 +18,7 @@ import LeaderBoard from "./pages/Team/leader_board";
 import EditProfile from "./pages/user/edit_profile";
 import TeamDashboard from "./pages/Team/team_dashboard";
 import PrivateTeams from "./pages/Team/team_private_user";
+import LeaderBoardUser from "./pages/user/leaderBoardUser";
 
 
 
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/edit_userProfile" element={<EditProfile />} />
                 <Route path="/team_dashboard" element={<TeamDashboard />} />
                 <Route path="/team_private" element={<PrivateTeams />} />
+                <Route path="/leaderboard_user" element={<LeaderBoardUser />} />
             </Routes>
         </Router>
     );

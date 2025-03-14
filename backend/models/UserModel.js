@@ -100,6 +100,20 @@ const getUserEvents = async (userId) => {
     }
 };
 
+async function getUsersByPoints() {
+    
+    try {
+        const result = await pool.query(
+        "select full_name, points FROM users ORDER BY points DESC"
+    );
+    return result.rows;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw new Error("Error fetching user data");
+    }
+}
+
+
 
 module.exports = {
     createUser,
@@ -110,4 +124,5 @@ module.exports = {
     updateUserQuery,
     getUserEvents,
     userPoints,
+    getUsersByPoints,
 };
