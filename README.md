@@ -84,6 +84,8 @@ Install my-project with npm 🚀
   GET /api/users/volunteering-history - fetch users volunteering history
   GET /api/users/profile - Retrieve user profile data
   PUT /api/users/edit_profile - Edit user profile details
+  PUT /api/users/update_points - Update user point automatically
+  GET /api/users/sorted_by_points - Get users to show in leaderboard
 ```
 
 #### 📊 Dashboard 
