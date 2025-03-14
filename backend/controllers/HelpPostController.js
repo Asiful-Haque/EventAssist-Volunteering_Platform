@@ -38,9 +38,7 @@ HelpPostController.getPosts = async (req, res) => {
 
         const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
         const userId = parseInt(decoded.userId, 10);
-        console.log("user id ",userId);
 
-        // console.log(email,password);
         const posts = await getHelpPost(userId);
 
         if (!posts || posts.length === 0) {

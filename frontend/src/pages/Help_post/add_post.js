@@ -54,44 +54,45 @@ export default function AddPost() {
 
     return (
         <>
-            <Header />
-            <div className="min-h-screen bg-white">
-                <div className="sticky top-0 bg-gradient-to-r from-purple-500 to-blue-500 p-4 flex justify-between items-center z-10 shadow-lg">
-                    <h1 className="text-2xl font-semibold text-white">Add a Post</h1>
+            <div className="min-h-screen bg-gray-600">
+                <div className="sticky top-0 bg-gray-400 p-4 flex justify-between items-center z-10 shadow-lg">
+                    <h1 className="mx-auto text-2xl font-semibold text-black">Add a Post</h1>
                 </div>
 
-                <div className="flex justify-center items-center h-screen bg-white">
-                    <div className="relative w-96 h-auto p-8 rounded-lg shadow-2xl bg-white border border-gray-200">
+                <div className="flex justify-center items-center h-screen backdrop-blur-md bg-white/10 border border-white/20">
+                    <div className="relative w-[50%] h-auto mt-6 mb-6 p-8 rounded-lg shadow-2xl backdrop-blur-md bg-white/10 border border-white/20">
                         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                             <div>
-                                <label className="text-gray-800 font-medium">Title</label>
+                                <label className="text-red-500 text-2xl font-semibold text-center">
+                                    Title
+                                </label>
                                 <input
                                     type="text"
                                     name="title"
                                     placeholder="Enter your title"
-                                    className="w-full mt-2 p-3 bg-white text-gray-800 rounded-md outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-gray-300 text-gray-800 rounded-md outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500"
                                     value={title}
                                     onChange={handleTitleChange}
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-800 font-medium mt-4 block">
+                                <label className="text-red-500 text-2xl font-semibold text-center">
                                     Description
                                 </label>
                                 <textarea
                                     name="description"
                                     placeholder="Enter a description"
-                                    className="w-full mt-2 p-3 bg-white text-gray-800 rounded-md outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-gray-300 text-gray-800 rounded-md outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500"
                                     value={description}
                                     onChange={handleDescriptionChange}
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-800 font-medium mt-4 block">
+                                <label className="text-red-500 text-2xl font-semibold text-center">
                                     Urgency
                                 </label>
                                 <select
-                                    className="w-full mt-2 p-3 bg-white text-gray-800 rounded-md outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500"
+                                    className="w-full mt-2 p-3 bg-gray-300 text-gray-800 rounded-md outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500"
                                     value={urgency}
                                     onChange={handleUrgencyChange}
                                 >
@@ -105,7 +106,7 @@ export default function AddPost() {
                             <div className="flex justify-end mt-6">
                                 <button
                                     type="submit"
-                                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-blue-600 m-auto"
                                 >
                                     Submit
                                 </button>

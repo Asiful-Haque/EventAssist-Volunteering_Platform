@@ -50,7 +50,6 @@ TeamController.getTeamMembers = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        // console.log("Verified token:", decoded);
 
         const userId = parseInt(decoded.userId, 10);
 
@@ -82,7 +81,7 @@ TeamController.getTeamEvents = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        // console.log("Verified token:", decoded);
+        
 
         const userId = parseInt(decoded.userId, 10);
 
@@ -90,7 +89,7 @@ TeamController.getTeamEvents = async (req, res) => {
             return res.status(400).json({ message: "Invalid token" });
         }
         const { team_id } = req.body;
-        // console.log("team id is ",team_id);
+       
         if (!team_id) {
             return res.status(400).json({ message: "team_id is required" });
         }

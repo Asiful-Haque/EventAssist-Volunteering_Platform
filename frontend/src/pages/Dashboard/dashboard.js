@@ -1,32 +1,15 @@
 import { Link } from "react-router-dom";
-// import Header from "../../components/Header";const DashboardPage = () => {
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-//     return (
-//         <>
-//             <Header />
-//             <div>
-//                 <h2>Hello from Dashboard</h2>
-//                 <div>
-//                     <button>
-//                         <Link to="/community_help_post">Community Help post</Link>
-//                     </button>
-//                     <button>
-//                         <Link to="/signup">Signup</Link>
-//                     </button>
-//                     <button>
-//                         <Link to="/events">Events</Link>
-//                     </button>
-//                 </div>
-//             </div>
-//         </>
-//     );
-// };
 
-// export default DashboardPage;
 import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
     const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("token"); 
+        navigate("/signup"); 
+    };
+
     return (
         <div
             className="relative bg-cover bg-center h-auto flex justify-center"
@@ -40,18 +23,21 @@ export default function Dashboard() {
 
                 <div className="flex space-x-6 items-center">
                     <div className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110">
-                        <a href="/profile">Pages</a>
-                    </div>
-                    <div className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110">
                         <a href="/events">Events</a>
                     </div>
                     <div className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110">
                         <a href="/www.linkedin.com">Linkedin</a>
                     </div>
-                    <a href="#" className="text-black hover:text-gray-300">
-                        Github
-                    </a>
-                    <button className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110">
+                    <div className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110">
+                        <a href="/www.github.com">Github</a>
+                    </div>
+                    <div className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110">
+                        <a href="/profile">Profile</a>
+                    </div>
+                    <button
+                        onClick={handleLogout}
+                        className="text-black hover:text-black transform transition-transform duration-200 hover:scale-110"
+                    >
                         <Link to="/signup">Logout</Link>
                     </button>
 

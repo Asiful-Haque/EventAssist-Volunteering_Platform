@@ -53,7 +53,6 @@ UserController.registerUser = async (req, res) => {
 UserController.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        // console.log(email,password);
         const user = await findUserByEmail(email);
         if (!user) {
             return res.status(400).json({ message: "Invalid credentials" });
@@ -63,7 +62,6 @@ UserController.loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-        console.log("user id for token is ",user.user_id);
         const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, { expiresIn: "1h" });
 
         res.json({ message: "Login successful", token });
@@ -82,15 +80,11 @@ UserController.addHistory = async (req, res) => {
 
         //if found then checking for hte id's
         const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
-        console.log("veiried token ",decoded);
         const userId = parseInt(decoded.userId, 10);
-        console.log("use id is ",userId);
-        console.log("User ID type:", typeof userId);
 
         const { event_name, total_hours } = req.body;
         console.log("history is ", event_name, total_hours);
         
-        // console.log(email,password);
         const history = await createVolHistory(userId, event_name, total_hours);
         if (!history) {
             return res.status(400).json({ message: "Not found" });
@@ -107,12 +101,11 @@ UserController.addHistory = async (req, res) => {
 
 UserController.getHistory = async (req, res) => {
     try {
-        const tokenFromLocalStorage = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
+        const tokenFromLocalStorage = req.headers.authorization?.split(" ")[1]; 
         if (!tokenFromLocalStorage) {
             return res.status(401).json({ message: "No token provided" });
         }
         const decoded = jwt.verify(tokenFromLocalStorage, JWT_SECRET);
-        // console.log("Verified token:", decoded);
         const userId = parseInt(decoded.userId, 10);
 
         const history = await getVolHistoryByUserId(userId);
@@ -136,7 +129,6 @@ UserController.editUserProfile = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        // console.log("Verified token:", decoded);
 
         const userId = parseInt(decoded.userId, 10);
 
@@ -179,7 +171,6 @@ UserController.getUserData = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        // console.log("Verified token:", decoded);
 
         const userId = parseInt(decoded.userId, 10);
 
@@ -210,7 +201,6 @@ UserController.UpdateUserPoint = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        // console.log("Verified token:", decoded);
 
         const userId = parseInt(decoded.userId, 10);
 
@@ -239,7 +229,6 @@ UserController.getUsersSortedByPoints = async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log("Verified token:", decoded);
         const userId = decoded.userId; 
         if (!userId) {
             return res.status(400).json({ message: "Invalid token" });
