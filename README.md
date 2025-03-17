@@ -44,10 +44,9 @@ This project is a Volunteer Engagement Platform designed to connect users with s
 
 
 ## 🛢️ Database Schema
-Link: https://drive.google.com/file/d/12xleV5gVxguQCDjuqcvK09d--YEUtBb4/view?usp=sharing
+Link: [https://drive.google.com/file/d/12xleV5gVxguQCDjuqcvK09d--YEUtBb4/view?usp=sharing]
 
-
-![Database](https://res.cloudinary.com/ddrvm4qt3/image/upload/v1741960287/EventAssist.drawio_fdcjki.png)
+![Database](https://res.cloudinary.com/drpasy4d2/image/upload/v1742204114/EventAssist.drawio_1_cyfew8.png)
 
 
 
