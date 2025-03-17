@@ -1,6 +1,7 @@
 # 🤝 EventAssist 🤝
 
 This project is a Volunteer Engagement Platform designed to connect users with social causes and volunteer opportunities. It allows users to register, manage their profiles, discover and join volunteer events, post and respond to community help requests, and form teams for long-term initiatives.
+![Database](https://res.cloudinary.com/drpasy4d2/image/upload/v1742228913/handson_o00vco.png)
 
 ## 🛠️ Tech Stack
 
