@@ -84,46 +84,46 @@ Install my-project with npm 🚀
 #### 👤 User 
 
 ```http
-  POST /api/users/register - Register a new user
-  POST /api/users/login - Authenticate user and return a token
-  POST /api/users/volunteering-history - Add users volunteeting history
-  GET /api/users/volunteering-history - fetch users volunteering history
-  GET /api/users/profile - Retrieve user profile data
-  PUT /api/users/edit_profile - Edit user profile details
-  PUT /api/users/update_points - Update user point automatically
-  GET /api/users/sorted_by_points - Get users to show in leaderboard
+POST /api/users/register - Register a new user
+POST /api/users/login - Authenticate user and return a token
+POST /api/users/volunteering-history - Add users volunteeting history
+GET /api/users/volunteering-history - fetch users volunteering history
+GET /api/users/profile - Retrieve user profile data
+PUT /api/users/edit_profile - Edit user profile details
+PUT /api/users/update_points - Update user point automatically
+GET /api/users/sorted_by_points - Get users to show in leaderboard
 ```
 
 #### 📊 Dashboard 
 
 ```http
-  /api/dashboard - Base Route
+/api/dashboard - Base Route
 ```
 
 #### 🌍 Community Help Post 
 
 ```http
-  POST /api/helpPost/create_post - Create a new help Post
-  GET /api/helpPost/getPosts - Fetch all help posts 
-  POST /api/helpPost/submitComment - Submit a comment to the posts
-  GET /api/helpPost/getComments/:post_id - Get comments for the post 
+POST /api/helpPost/create_post - Create a new help Post
+GET /api/helpPost/getPosts - Fetch all help posts 
+POST /api/helpPost/submitComment - Submit a comment to the posts
+GET /api/helpPost/getComments/:post_id - Get comments for the post 
 ```
 
 #### 🎟️ Events
 
 ```http
-  POST /api/event/add_event - Create a new event
-  GET /api/event/get_events - Fetch all events  
+POST /api/event/add_event - Create a new event
+GET /api/event/get_events - Fetch all events  
 ```
 
 #### 🏆 Teams
 
 ```http
-  GET /api/teams/get_teams - Retrieve all teams 
-  POST /api/teams/add_teams - Create a new team 
-  POST /api/teams/see_members - Fetch all members of a team 
-  POST /api/teams/see_events - Fetch all events organized by a team   
-  GET /api/teams/see_private_teams - Fetch all private groups of each user
+GET /api/teams/get_teams - Retrieve all teams 
+POST /api/teams/add_teams - Create a new team 
+POST /api/teams/see_members - Fetch all members of a team 
+POST /api/teams/see_events - Fetch all events organized by a team   
+GET /api/teams/see_private_teams - Fetch all private groups of each user
 ```
 
 
