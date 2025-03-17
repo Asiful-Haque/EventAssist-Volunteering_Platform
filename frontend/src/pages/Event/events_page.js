@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import EventCard from "../../components/EventCard";
 

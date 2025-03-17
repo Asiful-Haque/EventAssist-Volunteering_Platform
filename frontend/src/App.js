@@ -19,6 +19,7 @@ import EditProfile from "./pages/user/edit_profile";
 import TeamDashboard from "./pages/Team/team_dashboard";
 import PrivateTeams from "./pages/Team/team_private_user";
 import LeaderBoardUser from "./pages/user/leaderBoardUser";
+import Reward from "./pages/Reward/reward";
 
 
 
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/team_dashboard" element={<TeamDashboard />} />
                 <Route path="/team_private" element={<PrivateTeams />} />
                 <Route path="/leaderboard_user" element={<LeaderBoardUser />} />
+                <Route path="/reward" element={<Reward />} />
             </Routes>
         </Router>
     );

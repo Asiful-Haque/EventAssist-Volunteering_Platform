@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -58,7 +57,6 @@ const LoginPage = () => {
 
     return (
         <>
-            {/* <Header /> */}
             <div
                 className="relative flex justify-center items-center h-screen bg-[#080710] bg-cover bg-center"
                 style={{ backgroundImage: "url('/volunteerCover1.jpg')" }}

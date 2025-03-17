@@ -83,7 +83,6 @@ UserController.addHistory = async (req, res) => {
         const userId = parseInt(decoded.userId, 10);
 
         const { event_name, total_hours } = req.body;
-        console.log("history is ", event_name, total_hours);
         
         const history = await createVolHistory(userId, event_name, total_hours);
         if (!history) {

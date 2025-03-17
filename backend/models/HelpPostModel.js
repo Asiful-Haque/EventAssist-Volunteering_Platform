@@ -11,7 +11,7 @@ async function createHelpPost(title, description, urgency, userId) {
 }
 
 async function getHelpPost(userId) {
-    const result = await pool.query(`select * from help_req where user_id = $1`, [userId]);
+    const result = await pool.query(`select * from help_req `);
     return result.rows;
 }
 

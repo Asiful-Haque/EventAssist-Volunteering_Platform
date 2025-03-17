@@ -100,7 +100,7 @@ const Profile = () => {
         if (totalhours > 0) {
             updateUserPoints();
         }
-    }, [historyData, eventData]); 
+    }, [historyData, eventData]);
 
     return (
         <>
@@ -115,7 +115,7 @@ const Profile = () => {
                                     className="w-3/4 h-auto rounded-full mx-auto"
                                 />
                                 <label className="block mt-4">
-                                    <span className="inline-block px-4 py-2 bg-red-500 text-white rounded cursor-pointer">
+                                    <span className="inline-block px-4 py-2 bg-black text-white rounded cursor-pointer">
                                         Change Photo
                                     </span>
                                     <input type="file" className="hidden" />
@@ -131,8 +131,19 @@ const Profile = () => {
                                 </h6>
                             </div>
                             <Link to="/edit_userProfile" state={{ userData: userData?.user }}>
-                                <button className="bg-red-500 mt-20 h-10 text-white px-4 py-2 rounded-lg">
+                                <button className="bg-black mt-20 h-10 text-white px-4 py-2 rounded-lg">
                                     Edit Profile
+                                </button>
+                            </Link>
+                            <Link
+                                to="/reward"
+                                state={{
+                                    userName: userData?.user?.full_name ?? "Guest",
+                                    totalHour: totalhours ?? 0,
+                                }}
+                            >
+                                <button className="bg-black ml-2 mt-20 h-10 text-white px-4 py-2 rounded-lg">
+                                    Certificate
                                 </button>
                             </Link>
                         </div>
@@ -197,7 +208,7 @@ const Profile = () => {
                     <div className="bg-[#828282] w-[90%] mx-auto mt-12 p-6 shadow-lg text-white rounded-lg">
                         <div className="flex justify-between items-center">
                             <button
-                                className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                                className="bg-black text-white px-4 py-2 rounded-lg"
                                 onClick={() => navigate("/add_history")}
                             >
                                 Add History
@@ -205,12 +216,6 @@ const Profile = () => {
                             <h1>Logged Hours: {totalhours}</h1>
                             <h1>Total points: {totalPoints}</h1>
                         </div>
-
-                        {historyData.length === 0 && eventData.length === 0 && (
-                            <h2 className="text-white text-2xl font-semibold text-center">
-                                No Volunteering History
-                            </h2>
-                        )}
 
                         {historyData.length > 0 || eventData.length > 0 ? (
                             <div className="text-white text-sm mt-4 p-3 bg-gray-700/50 rounded-md">

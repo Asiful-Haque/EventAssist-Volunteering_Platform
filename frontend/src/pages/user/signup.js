@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 
 export default function Signup() {
     const [page, setPage] = useState(1); 
@@ -102,7 +101,7 @@ export default function Signup() {
 
     return (
         <>
-            {/* <Header /> */}
+            
             <div
                 className="relative flex justify-center items-center h-screen bg-[#080710] bg-cover bg-center"
                 style={{ backgroundImage: "url('/volunteerCover1.jpg')" }}

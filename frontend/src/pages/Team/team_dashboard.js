@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import EventCard from "../../components/EventCard"; // Reusable component for events
+
 
 const TeamDashboard = () => {
     const location = useLocation();
